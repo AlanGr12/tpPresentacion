@@ -34,4 +34,46 @@ public class HomeController : Controller
             return View("Index");
         }
     }
+
+    public IActionResult Menu()
+    {
+        if (!HttpContext.Session.Keys.Contains("IdUsuario"))
+        {
+            return RedirectToAction("Index");
+        }
+
+        int id = HttpContext.Session.GetInt32("IdUsuario").Value;
+
+        DatoPersonal usuario = BD.GetUsuario(id);
+
+        if (usuario == null)
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index");
+        }
+
+        return View(usuario);
+    }
+    public IActionResult MostrarDatosFamiliares(){
+
+        if (!HttpContext.Session.Keys.Contains("IdUsuario"))
+        {
+            return RedirectToAction("Index");
+        }
+
+        int id = HttpContext.Session.GetInt32("IdUsuario").Value;
+        List<DatoFamiliar> familiares = BD.GetDatoFamiliar(id);
+        return View(familiares);
+    }
+
+    public IActionResult MostrarDatosInteres(){
+         if (!HttpContext.Session.Keys.Contains("IdUsuario"))
+        {
+            return RedirectToAction("Index");
+        }
+
+        int id = HttpContext.Session.GetInt32("IdUsuario").Value;
+        List<DatoInteres> intereses = BD.GetDatoInteres(id);
+        return View(intereses);
+    }
 }

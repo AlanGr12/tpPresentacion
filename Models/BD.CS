@@ -8,7 +8,7 @@ public static int Login(string email, string contraseña){
   using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SELECT Id FROM DatoPersonal WHERE Email = @email AND Contraseña = @contraseña";
-            return db.QueryFirstOrDefault<int?>(sql, new { email, contraseña }) ?? -1;
+            return db.QueryFirstOrDefault<int>(sql, new { email, contraseña }) -1;
         }
 }
     public static DatoPersonal GetUsuario(int id)
