@@ -17,4 +17,21 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    [HttpPost]
+
+    public IActionResult Login(string email, string contraseña){
+
+        int id = BD.Login(email, contraseña);
+        if (id != -1)
+        {
+            HttpContext.Session.SetInt32("IdUsuario", id);
+            return RedirectToAction("Menu");
+        }
+        else
+        {
+            ViewBag.Error = "Email o contraseña incorrectos";
+            return View("Index");
+        }
+    }
 }
