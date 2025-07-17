@@ -4,12 +4,11 @@
 
 <div class="contenedor-fondo">
     <div class="texto-superpuesto">
-        <p>Bienvenido a la presentacion</p>
-
-         <Form action = '@Url.Action("Login", "Home")' method = "POST" enctype="multipart/form-data">
-         <input type="hidden" name="salaActual" value="1"/>
-            <input type="text" name="respuesta"  class="form-control" required />
-            <br />
+        <p>Bienvenido a la presentacion, ingrese su email y contraseña para ver los datos</p>
+         <Form action = '@Url.Action("Login", "Home")' method = "POST">
+         <input type="hidden" name="nombre" value="1"/>
+            <input type="text" name="email" placeholder="email" class="form-control" required />
+            <input type="text" name="contraseña"  placeholder="contraseña" class="form-control" required />
             <button type="submit" class="btn respuesta-btn">Iniciar Sesion</button>
         </form>
     </div>

@@ -15,7 +15,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        return View("Index");
     }
 
     [HttpPost]
@@ -26,7 +26,7 @@ public class HomeController : Controller
         if (id != -1)
         {
             HttpContext.Session.SetInt32("IdUsuario", id);
-            return RedirectToAction("Menu");
+            return View("mostrarDatosPersonales");
         }
         else
         {
@@ -35,7 +35,7 @@ public class HomeController : Controller
         }
     }
 
-    public IActionResult Menu()
+    public IActionResult mostrarDatosPersonales()
     {
         if (!HttpContext.Session.Keys.Contains("IdUsuario"))
         {
@@ -52,7 +52,7 @@ public class HomeController : Controller
             return RedirectToAction("Index");
         }
 
-        return View(usuario);
+        return View("infoDatosPersonales");
     }
     public IActionResult MostrarDatosFamiliares(){
 
@@ -63,7 +63,7 @@ public class HomeController : Controller
 
         int id = HttpContext.Session.GetInt32("IdUsuario").Value;
         List<DatoFamiliar> familiares = BD.GetDatoFamiliar(id);
-        return View(familiares);
+        return View("infoDatosFamiliares");
     }
 
     public IActionResult MostrarDatosInteres(){
@@ -74,6 +74,6 @@ public class HomeController : Controller
 
         int id = HttpContext.Session.GetInt32("IdUsuario").Value;
         List<DatoInteres> intereses = BD.GetDatoInteres(id);
-        return View(intereses);
+        return View("infoDatosIntereses");
     }
 }
